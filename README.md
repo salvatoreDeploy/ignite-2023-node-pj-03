@@ -7,8 +7,8 @@
 - [x] Deve ser possivel se cadastrar - It should be possible to register;
 - [x] Deve ser possivel se autenticar - It must be possible to authenticate;
 - [x] Deve ser possivel obter o perfil de um usuario logado - It should be possible to get the profile of a logged in user;
-- [ ] Deve ser possivel obter o numero de check-ins realizados pelo usuario logado - It must be possible to obtain the number of check-ins performed by the logged in user;
-- [ ] Deve ser possivel o usuario obter seu historico de check-ins - It must be possible for the user to obtain their check-in history;
+- [x] Deve ser possivel obter o numero de check-ins realizados pelo usuario logado - It must be possible to obtain the number of check-ins performed by the logged in user;
+- [x] Deve ser possivel o usuario obter seu historico de check-ins - It must be possible for the user to obtain their check-in history;
 - [ ] Deve ser possivel o usuario buscar academia próxima - It should be possible for the user to search for a nearby gym;
 - [ ] Deve ser possivel o usuario buscar academias pelo nome - It should be possible for the user to search for gyms by name;
 - [x] Deve ser possivel o usuario realizar check-in em uma academia - It must be possible for the user to check-in at a gym;
