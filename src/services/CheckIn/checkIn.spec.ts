@@ -6,15 +6,15 @@ import { Decimal } from '@prisma/client/runtime/library'
 import { MaxDistanceErrors } from '../errors/maxDistanceErrors'
 import { MaxNumberOfCheackInsErrors } from '../errors/maxNumberOfCheackInsErrors'
 
-let inMemoryUserRepository: InMemoryCheckInsRepository
+let inMemoryCheckInsRepository: InMemoryCheckInsRepository
 let inMemoryGymsRepository: InMemoryGymsRepository
 let sut: CheckInService
 
 describe('Check In Service', () => {
   beforeEach(async () => {
-    inMemoryUserRepository = new InMemoryCheckInsRepository()
+    inMemoryCheckInsRepository = new InMemoryCheckInsRepository()
     inMemoryGymsRepository = new InMemoryGymsRepository()
-    sut = new CheckInService(inMemoryUserRepository, inMemoryGymsRepository)
+    sut = new CheckInService(inMemoryCheckInsRepository, inMemoryGymsRepository)
 
     await inMemoryGymsRepository.create({
       id: 'gym-id-1',
