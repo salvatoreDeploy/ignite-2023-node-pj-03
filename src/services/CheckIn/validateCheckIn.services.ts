@@ -1,34 +1,43 @@
 /* eslint-disable prettier/prettier */
-import { CheckIn } from '@prisma/client'
-import { CheckInRepository } from 'src/repositories/checkInRepository'
-import { ResourceNotFoundErrors } from '../errors/resourceNotFoundErrors'
-
+import { CheckIn } from "@prisma/client";
+import { CheckInRepository } from "src/repositories/checkInRepository";
+import { ResourceNotFoundErrors } from "../errors/resourceNotFoundErrors";
+import dayjs from "dayjs";
+import { LateCheckinValidationErrors } from "../errors/lateCheckinValidationErrors";
 
 interface ValidadeCheckInServiceRequest {
-  checkId: string
+  checkId: string;
 }
 
 interface ValidadeCheckInServiceResponse {
-  checkIn: CheckIn
+  checkIn: CheckIn;
 }
 
 export class ValidadeCheckInService {
   constructor(private checkInRepository: CheckInRepository) { }
 
   async execute({
-    checkId
+    checkId,
   }: ValidadeCheckInServiceRequest): Promise<ValidadeCheckInServiceResponse> {
-
-    const checkIn = await this.checkInRepository.findByid(checkId)
+    const checkIn = await this.checkInRepository.findByid(checkId);
 
     if (!checkIn) {
-      throw new ResourceNotFoundErrors()
+      throw new ResourceNotFoundErrors();
     }
 
-    checkIn.validated_at = new Date()
+    const distanceInMinutesFromCheckInCreation = dayjs(new Date()).diff(
+      checkIn.created_at,
+      "minutes"
+    );
 
-    await this.checkInRepository.save(checkIn)
+    if (distanceInMinutesFromCheckInCreation > 20) {
+      throw new LateCheckinValidationErrors()
+    }
 
-    return { checkIn }
+    checkIn.validated_at = new Date();
+
+    await this.checkInRepository.save(checkIn);
+
+    return { checkIn };
   }
 }
