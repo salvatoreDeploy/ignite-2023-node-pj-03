@@ -37,7 +37,7 @@ describe('Search Gyms Service', () => {
     expect(gyms).toEqual([expect.objectContaining({ title: 'Gym New 2' })])
   })
 
-  it.skip('Shoud be able to fetch paginated search gyms', async () => {
+  it('Shoud be able to fetch paginated search gyms', async () => {
     for (let i = 1; i <= 22; i++) {
       await inMemoryGymRepository.create({
         title: `Gym New - ${i}`,
