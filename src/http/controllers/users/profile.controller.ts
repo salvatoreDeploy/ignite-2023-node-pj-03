@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { makeGetUserProfileService } from 'src/services/factories/make-getUserProfile.sevices'
 
-export async function profileontroller(
+export async function profileController(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
