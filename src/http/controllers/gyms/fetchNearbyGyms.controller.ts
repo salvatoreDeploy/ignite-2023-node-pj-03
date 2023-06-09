@@ -17,15 +17,15 @@ export async function FetchNearbyGYmsController(
   })
 
   const { latitude, longitude } = nearbyGymsQueryParamsSchema.parse(
-    request.body,
+    request.query,
   )
 
   const fetchNearbyGymsService = makeFetchNearByGymsService()
 
-  await fetchNearbyGymsService.execute({
+  const { gyms } = await fetchNearbyGymsService.execute({
     userLatitude: latitude,
     userLongitude: longitude,
   })
 
-  return reply.status(201).send()
+  return reply.status(201).send({ gyms })
 }

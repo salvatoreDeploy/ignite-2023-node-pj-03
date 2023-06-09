@@ -12,14 +12,14 @@ export async function SearchGymController(
     page: z.coerce.number().min(1).default(1),
   })
 
-  const { query, page } = searchGymQueryParamSchema.parse(request.body)
+  const { query, page } = searchGymQueryParamSchema.parse(request.query)
 
-  const csearchGymService = makeSearchGymService()
+  const searchGymService = makeSearchGymService()
 
-  await csearchGymService.execute({
+  const { gyms } = await searchGymService.execute({
     query,
     page,
   })
 
-  return reply.status(201).send()
+  return reply.status(201).send({ gyms })
 }
