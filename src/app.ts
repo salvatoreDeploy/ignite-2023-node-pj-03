@@ -2,9 +2,10 @@ import fastify from 'fastify'
 import { ZodError } from 'zod'
 import { env } from './env'
 import fastifyJwt from '@fastify/jwt'
+
+import { checkInRoutes } from './http/controllers/checkins/routes'
 import { usersRoutes } from './http/controllers/users/routes'
 import { gymsRoutes } from './http/controllers/gyms/routes'
-import { checkInRoutes } from './http/controllers/checkins/routes'
 
 export const app = fastify()
 
@@ -18,7 +19,7 @@ app.register(checkInRoutes)
 app.setErrorHandler((error, request, reply) => {
   if (error instanceof ZodError) {
     return reply
-      .status(400)
+      .status(401)
       .send({ message: 'Validation error', issues: error.format() })
   }
 

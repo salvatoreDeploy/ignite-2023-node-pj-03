@@ -7,7 +7,7 @@ import { FetchNearbyGYmsController } from './fetchNearbyGyms.controller'
 export async function gymsRoutes(app: FastifyInstance) {
   app.addHook('onRequest', verifyJWT)
 
-  app.post('creategym', CreateGymController)
-  app.get('searchgym', SearchGymController)
-  app.get('fetchgym', FetchNearbyGYmsController)
+  app.post('/creategym', CreateGymController)
+  app.get('/searchgym', SearchGymController)
+  app.get('/fetchgym', FetchNearbyGYmsController)
 }

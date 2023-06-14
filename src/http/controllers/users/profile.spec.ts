@@ -1,9 +1,10 @@
 import request from 'supertest'
 import { app } from 'src/app'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
+import { CreateAndAuthenticateUser } from 'src/utils/test/createAndAuthenticateUser'
 
 // eslint-disable-next-line prettier/prettier
-describe('Register (e2e)', () => {
+describe('Profile (e2e)', () => {
   beforeAll(async () => {
     await app.ready()
   })
@@ -13,18 +14,7 @@ describe('Register (e2e)', () => {
   })
 
   it('Should be able to register', async () => {
-    await request(app.server).post('/users').send({
-      name: 'John Doe',
-      email: 'jonhdoe@teste.com',
-      password: '123456',
-    })
-
-    const authResponse = await request(app.server).post('/session').send({
-      email: 'jonhdoe@teste.com',
-      password: '123456',
-    })
-
-    const { token } = authResponse.body
+    const { token } = await CreateAndAuthenticateUser(app)
 
     const response = await request(app.server)
       .get('/me')
