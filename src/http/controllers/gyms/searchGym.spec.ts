@@ -14,7 +14,7 @@ describe('Gyms (e2e)', () => {
   })
 
   it('Should be able to search a gym', async () => {
-    const { token } = await CreateAndAuthenticateUser(app)
+    const { token } = await CreateAndAuthenticateUser(app, true)
 
     for (let i = 1; i <= 3; i++) {
       await request(app.server)
